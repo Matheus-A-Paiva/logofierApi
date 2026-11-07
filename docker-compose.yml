@@ -20,7 +20,9 @@ services:
       retries: 10
 
   api:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.otimizado
     container_name: logofier-api
     restart: unless-stopped
     ports:
@@ -42,6 +44,8 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
+    mem_limit: 512m
+    cpus: 0.5
 
 volumes:
   postgres_data:
